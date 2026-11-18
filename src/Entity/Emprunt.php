@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\EmpruntRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmpruntRepository::class)]
 class Emprunt
@@ -13,19 +15,21 @@ class Emprunt
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?\DateTime $dateEmprunt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
+    private ?\DateTimeImmutable $dateEmprunt = null;
 
-    #[ORM\Column]
-    private ?\DateTime $dateRetourPrevu = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
+    private ?\DateTimeImmutable $dateRetourPrevu = null;
 
-    #[ORM\Column]
-    private ?\DateTime $dateRetourReelle = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $dateRetourReelle = null;
 
     #[ORM\ManyToOne(inversedBy: 'emprunts')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Exemplaire $exemplaire = null;
 
     #[ORM\ManyToOne(inversedBy: 'emprunts')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $utilisateur = null;
 
     public function getId(): ?int
