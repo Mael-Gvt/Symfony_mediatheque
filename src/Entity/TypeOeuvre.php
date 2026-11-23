@@ -40,6 +40,11 @@ class TypeOeuvre
         return $this->libelle;
     }
 
+    public function __toString(): string
+    {
+        return $this->libelle ?? '';
+    }
+
     public function setLibelle(string $libelle): static
     {
         $this->libelle = $libelle;

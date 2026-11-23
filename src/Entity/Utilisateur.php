@@ -5,12 +5,14 @@ namespace App\Entity;
 use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -46,6 +48,9 @@ class Utilisateur
      */
     #[ORM\OneToMany(targetEntity: Emprunt::class, mappedBy: 'utilisateur')]
     private Collection $emprunts;
+
+    #[ORM\Column(type: Types::JSON)]
+    private array $roles = [];
 
     public function __construct()
     {
@@ -93,7 +98,12 @@ class Utilisateur
         return $this;
     }
 
-    public function getMdp(): ?string
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function getPassword(): ?string
     {
         return $this->mdp;
     }
@@ -105,24 +115,24 @@ class Utilisateur
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTime
+    public function getDateCreation(): ?\DateTimeImmutable
     {
         return $this->dateCreation;
     }
 
-    public function setDateCreation(\DateTime $dateCreation): static
+    public function setDateCreation(\DateTimeImmutable $dateCreation): static
     {
         $this->dateCreation = $dateCreation;
 
         return $this;
     }
 
-    public function getDateModification(): ?\DateTime
+    public function getDateModification(): ?\DateTimeImmutable
     {
         return $this->dateModification;
     }
 
-    public function setDateModification(\DateTime $dateModification): static
+    public function setDateModification(\DateTimeImmutable $dateModification): static
     {
         $this->dateModification = $dateModification;
 
@@ -155,6 +165,21 @@ class Utilisateur
                 $emprunt->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // garantir que chaque nouveau user aura au minimum le rôle 'user'
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
 
         return $this;
     }

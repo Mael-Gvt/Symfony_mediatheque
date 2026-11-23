@@ -41,6 +41,11 @@ class Categorie
         return $this->nom;
     }
 
+    public function __toString(): string
+    {
+        return $this->nom ?? '';
+    }
+
     public function setNom(string $nom): static
     {
         $this->nom = $nom;

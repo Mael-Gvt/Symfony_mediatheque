@@ -55,6 +55,11 @@ class Auteur
         return $this->prenom;
     }
 
+    public function __toString(): string
+    {
+        return trim(($this->prenom ?? '') . ' ' . ($this->nom ?? ''));
+    }
+
     public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
