@@ -23,7 +23,7 @@ security:
                 check_path: app_login
                 enable_csrf: true
             logout:
-                path: app_oeuvre
+                path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
 
@@ -39,6 +39,8 @@ security:
         - { path: ^/oeuvre, roles: PUBLIC_ACCESS }
         - { path: ^/oeuvre/recherche, roles: PUBLIC_ACCESS }
         - { path: ^/oeuvre/\d+$, roles: PUBLIC_ACCESS }
+        #utilisateurs connectés
+        - { path: ^/oeuvre/\d+$/reserver$, roles: ROLE_USER}
 
 when@test:
     security:

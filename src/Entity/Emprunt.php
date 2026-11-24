@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use App\Enum\StatutReservation;
 use App\Repository\EmpruntRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmpruntRepository::class)]
@@ -15,10 +16,10 @@ class Emprunt
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $dateEmprunt = null;
 
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $dateRetourPrevu = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
@@ -32,41 +33,47 @@ class Emprunt
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $utilisateur = null;
 
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
+    private ?\DateTimeImmutable $dateReservation = null;
+
+    #[ORM\Column(enumType: StatutReservation::class)]
+    private ?StatutReservation $statutReservation = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDateEmprunt(): ?\DateTime
+    public function getDateEmprunt(): ?\DateTimeImmutable
     {
         return $this->dateEmprunt;
     }
 
-    public function setDateEmprunt(\DateTime $dateEmprunt): static
+    public function setDateEmprunt(\DateTimeImmutable $dateEmprunt): static
     {
         $this->dateEmprunt = $dateEmprunt;
 
         return $this;
     }
 
-    public function getDateRetourPrevu(): ?\DateTime
+    public function getDateRetourPrevu(): ?\DateTimeImmutable
     {
         return $this->dateRetourPrevu;
     }
 
-    public function setDateRetourPrevu(\DateTime $dateRetourPrevu): static
+    public function setDateRetourPrevu(\DateTimeImmutable $dateRetourPrevu): static
     {
         $this->dateRetourPrevu = $dateRetourPrevu;
 
         return $this;
     }
 
-    public function getDateRetourReelle(): ?\DateTime
+    public function getDateRetourReelle(): ?\DateTimeImmutable
     {
         return $this->dateRetourReelle;
     }
 
-    public function setDateRetourReelle(\DateTime $dateRetourReelle): static
+    public function setDateRetourReelle(\DateTimeImmutable $dateRetourReelle): static
     {
         $this->dateRetourReelle = $dateRetourReelle;
 
@@ -94,6 +101,29 @@ class Emprunt
     {
         $this->utilisateur = $utilisateur;
 
+        return $this;
+    }
+
+    public function getDateReservation(): ?\DateTimeImmutable
+    {
+        return $this->dateReservation;
+    }
+
+    public function setDateReservation(\DateTimeImmutable $dateReservation): static
+    {
+        $this->dateReservation = $dateReservation;
+
+        return $this;
+    }
+
+    public function getStatutReservation(): ?StatutReservation
+    {
+        return $this->statutReservation;
+    }
+
+    public function setStatutReservation(StatutReservation $statutReservation): static
+    {
+        $this->statutReservation = $statutReservation;
         return $this;
     }
 }

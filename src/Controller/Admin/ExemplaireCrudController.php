@@ -4,8 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Exemplaire;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ExemplaireCrudController extends AbstractCrudController
@@ -15,14 +16,14 @@ class ExemplaireCrudController extends AbstractCrudController
         return Exemplaire::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('codeInventaire', "Code d'inventaire"),
+            BooleanField::new('disponibilite', 'Disponibilité'),
+            AssociationField::new('oeuvre')
+                ->setFormTypeOption('choice_label', 'titre'),
         ];
     }
-    */
 }
