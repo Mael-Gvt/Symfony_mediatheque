@@ -48,7 +48,7 @@ class Emprunt
         return $this->dateEmprunt;
     }
 
-    public function setDateEmprunt(\DateTimeImmutable $dateEmprunt): static
+    public function setDateEmprunt(?\DateTimeImmutable $dateEmprunt): static
     {
         $this->dateEmprunt = $dateEmprunt;
 
@@ -60,7 +60,7 @@ class Emprunt
         return $this->dateRetourPrevu;
     }
 
-    public function setDateRetourPrevu(\DateTimeImmutable $dateRetourPrevu): static
+    public function setDateRetourPrevu(?\DateTimeImmutable $dateRetourPrevu): static
     {
         $this->dateRetourPrevu = $dateRetourPrevu;
 
@@ -72,7 +72,7 @@ class Emprunt
         return $this->dateRetourReelle;
     }
 
-    public function setDateRetourReelle(\DateTimeImmutable $dateRetourReelle): static
+    public function setDateRetourReelle(?\DateTimeImmutable $dateRetourReelle): static
     {
         $this->dateRetourReelle = $dateRetourReelle;
 

@@ -55,7 +55,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkTo(OeuvreCrudController::class, 'Oeuvres', 'fas fa-book');
         yield MenuItem::linkTo(AuteurCrudController::class, 'Auteurs');
         yield MenuItem::linkTo(CategorieCrudController::class, 'Catégories');
-        yield MenuItem::linkTo(TypeOeuvreCrudController::class, 'Type de\'oeuvre');
+        yield MenuItem::linkTo(TypeOeuvreCrudController::class, 'Type de l\'oeuvre');
 
         // gestion des exemplaires
         yield MenuItem::section('Gestion des exemplaires');
