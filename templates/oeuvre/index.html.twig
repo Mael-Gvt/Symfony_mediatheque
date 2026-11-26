@@ -6,6 +6,8 @@
 
 <h1>La liste des oeuvres</h1>
 
+
+
 {% if oeuvres is empty %}
     <p>Aucunes oeuvres trouvées.</p>
 {% else %}
@@ -40,6 +42,12 @@
             {% endfor %}
         </tbody>
     </table>
+{% endif %}
+
+{% if app.user %}
+    <form action="{{ logout_path() }}" method="get">
+        <button type="submit">Se déconnecter</button>
+    </form>
 {% endif %}
 
 {% endblock %}

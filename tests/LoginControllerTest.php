@@ -74,7 +74,7 @@ class LoginControllerTest extends WebTestCase
             '_password' => 'password',
         ]);
 
-        self::assertResponseRedirects('/');
+        self::assertResponseRedirects('/oeuvre');
         $this->client->followRedirect();
 
         self::assertSelectorNotExists('.alert-danger');
