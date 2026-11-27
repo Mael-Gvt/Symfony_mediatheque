@@ -1,11 +1,8 @@
 @import url(form.css);
 
 body {
-    background-color: skyblue;
-}
-
-h1 {
-    color: blue;
+    background-color: rgb(211, 239, 250);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
 .msg-success {
@@ -15,4 +12,39 @@ h1 {
 .msg-erreur {
     color: red;
     font-weight: 700;
+}
+
+.carte-oeuvre{
+    border: 1px solid rgb(1, 0, 50);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0;
+    background-color: whitesmoke;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carte-oeuvre h3 {
+    color: rgb(0, 0, 4);
+    text-align: center;
+}
+
+.carte-oeuvre button {
+    background-color: rgb(2, 2, 31);
+    color: whitesmoke;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cartes-oeuvres{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+    gap: 20px;
+    margin: 40px;
 }

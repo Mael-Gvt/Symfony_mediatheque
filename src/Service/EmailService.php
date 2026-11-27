@@ -18,7 +18,7 @@ class EmailService
             ->from("mediatheque@exemple.com")
             ->to($emailUtilisateur)
             ->subject('Bienvenue dans notre médiathèque !')
-            ->text('Bienvenue ! Votre compte a bie, étté crée.');
+            ->text('Bienvenue ! Votre compte a bien, été crée.');
 
             $this->mailer->send($email);
     }
